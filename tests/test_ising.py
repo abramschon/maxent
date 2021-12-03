@@ -22,7 +22,13 @@ def test_example():
     pred_avgs = ising.averages()
     pred_corrs = ising.correlations()
     print("Predicted averages:", pred_avgs, "Predicted correlations:", pred_corrs,sep="\n")
-    print(f"P({ising.states[0]})={ising.p(ising.states[0])}")
+    
+    print(f"P({ising.states[0]})={ising.p(ising.states[0])}") # check it predicts 0 state
+
+    # check it fits relatively well
+    np.testing.assert_almost_equal(pred_avgs, avgs, decimal=2)
+    np.testing.assert_almost_equal(pred_corrs, corrs, decimal=2)
+
 
 def av_time_grad_ascent():
     # Calculate average times
