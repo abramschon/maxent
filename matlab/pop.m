@@ -1,7 +1,7 @@
 %% load a subset of 10 neurons from the data
 clear
 data_path = "../data/";
-load(data_path+"raw_data/data2014")
+load(data_path+"shuffled_data/data2014")
 
 % we are going to use the data where all observations over all repeats were shuffled
 NN = 10;

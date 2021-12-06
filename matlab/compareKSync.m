@@ -1,6 +1,6 @@
 %% load a subset of 10 neurons from the data
 clear
-load("../data/raw_data/data2014")
+load("../data/shuffled_data/data2014")
 
 NN = 5;
 train = train_rand(1:NN,:); % select activity of the first 10 neurons
