@@ -16,3 +16,7 @@ The code is structured into the following directories:
 - results: collection of plots, saved weights and other outputs
 - tests: tests for the code (PyTest)
 - data: data that we use to train the maxent models, and files to make things reproducible
+
+## Testing and simple examples
+
+At this stage, the unit tests in the `tests` directory provide simple examples with known outputs to test the code against. These can be run as tests by typing `pytest` into the command line. 
