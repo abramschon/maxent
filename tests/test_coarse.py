@@ -42,3 +42,13 @@ def test_pop_count_example():
 
     np.testing.assert_almost_equal(pred_p_K, p_K, decimal=2)
 
+def test_pop_count_sampling():
+    N = 10
+    p_K = np.ones(N+1)/(N+1)  # all counts are equally likely
+    pop = PopCount(N,p_K)
+    samples = pop.get_samples()
+    sample_p_K = np.bincount(np.sum(samples,axis=1).astype(int))/len(samples)
+
+    np.testing.assert_almost_equal(sample_p_K, p_K, decimal=2)
+
+
