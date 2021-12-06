@@ -1,0 +1,10 @@
+.venv
+*.DS_Store
+*.ipynb_checkpoints
+*__pycache__*
+wolfram/WolframLanguageForJupyter/*
+maxent.egg-info/*
+data/raw_data
+data/subsets
+data/shuffled_data
+data/trained_models/checkpoint.mat
