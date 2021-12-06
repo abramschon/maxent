@@ -44,7 +44,7 @@ clear
 data_path = "../data/shuffled_data/";
 load(data_path + "data2014")
 
-writematrix(train_rand, data_path+'time_shuffle_train_1.csv')
-writematrix(train_reps, data_path+'repeat_shuffle_train_1.csv')
-writematrix(test_rand, data_path+'time_shuffle_test_1.csv')
-writematrix(test_reps, data_path+'repeat_shuffle_test_1.csv')
+writematrix(train_rand, data_path+'time_shuffle_train.csv')
+writematrix(train_reps, data_path+'repeat_shuffle_train.csv')
+writematrix(test_rand, data_path+'time_shuffle_test.csv')
+writematrix(test_reps, data_path+'repeat_shuffle_test.csv')
