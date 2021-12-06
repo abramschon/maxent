@@ -18,6 +18,16 @@ def test_indep_example():
 
     np.testing.assert_almost_equal(pred_avgs, avgs, decimal=2)
 
+def test_indep_sampling():
+    N = 10
+    avgs = 0.5*np.ones(N) # prob of every neuron firing in a window is 0.5
+    ind = Independent(N, avgs) 
+    samples = ind.get_samples() #by default generates 4 * 100 000 samples
+    sample_avgs = np.mean(samples,axis=0)
+
+    np.testing.assert_almost_equal(sample_avgs, avgs, decimal=1) # will fail occasionally
+
+
 def test_pop_count_example():
     N = 10
     p_K = np.ones(N+1)/(N+1)  # all counts are equally likely
