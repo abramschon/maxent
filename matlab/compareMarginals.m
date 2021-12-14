@@ -1,24 +1,3 @@
-%% Compare predicted and actual higher order correlations
-clear
-load ../data/shuffled_data/data2014
-
-[total_N, obvs] = size(train_reps);
-
-% choose a model 
-shuffle = 'stimulus'; % 'stimulus' or 'time'
-name = 'pairwise'; % 'indep' 'ksync' 'pairwise' or 'kpairwise'
-NN = 100;  % 10  40 (70) 100 (130) (160)
-rep = 10; % also use this to set the seed of the random number generator
-file_name = "../data/trained_models/" + shuffle + "_" + NN + "_" + name + "_" + rep;
-
-% select which neurons activities to train model on
-rng(rep) % set seed based on rep - is this a good idea to do?
-id_N = randperm(total_N, NN); 
-
-% calculate p(K), 3rd order correlations, p(n firing | activity of n-1 neurons)
-m3 = maxent.createModel(10,'highorder',num2cell(nchoosek(1:10,3),2))
-maxent.getEmpiricalMarginals(samples,m3)
-
 %% Getting 3rd order correlations from indep model
 NN = 50
 indep = maxent.createModel(NN,'indep');
@@ -53,7 +32,8 @@ ind_pks = zeros(NN+1, n_reps);
 ising_pks = zeros(NN+1, n_reps);
 
 
-for rep = 1
+for rep = 1:n_reps
+    disp(rep)
     rng(rep)
     id_N = randperm(total_N, NN); 
     X = train_reps(id_N,:); % select the training data
@@ -79,9 +59,21 @@ for rep = 1
     disp("Pairwise pk")
     ising_pks(:,rep) = samplepk(m_ising.model, n_samples);
 end
-pks
-ind_pks
-ising_pks
+
+save_prefix = "../results/correlations/" + shuffle + "_" + NN;
+
+% save in matlab format
+save(save_prefix + "_indep_pwise_" + n_reps, ...
+    'corr3s', 'ind_corr3s', 'ising_corr3s', ...
+    'pks', 'ind_pks', 'ising_pks')
+
+% save in .csv format
+writematrix(corr3s, save_prefix +'_corr3s.csv'); % save model weights 
+writematrix(ind_corr3s, save_prefix +'_ind_corr3s.csv'); % save model weights 
+writematrix(ising_corr3s, save_prefix +'_ising_corr3s.csv'); % save model weights 
+writematrix(pks, save_prefix +'_corr3s.csv'); % save model weights 
+writematrix(ind_pks, save_prefix +'_ind_pks.csv'); % save model weights 
+writematrix(ising_pks, save_prefix +'_ising_pks.csv'); % save model weights 
 
 
 %% Getting model correlations
