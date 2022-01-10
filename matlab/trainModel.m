@@ -11,10 +11,10 @@ load ../data/shuffled_data/data2014
 % We then need to save the matlab models, and the model weights as csv
 % files. We will name the files `shuffle_NN_name_rep`
 
-for NN = 10:25 % define range of N interested in fitting
-    for rep = 1:10 % define which subset of the data to train on
+for NN = 20:25 % define range of N interested in fitting
+    for rep = 2:10 % define which subset of the data to train on
         shuffle = 'stimulus'; % how the data is shuffled: 'stimulus' or 'time'
-        name = 'indep'; % 'indep' 'ksync' 'pairwise' or 'kpairwise'
+        name = 'third'; % 'indep' 'ksync' 'pairwise' 'third' or 'kpairwise'
         file_name = "../data/trained_models/" + shuffle + "_" + NN + "_" + name + "_" + rep;
 
         % select which neurons activities to train model on
@@ -22,8 +22,16 @@ for NN = 10:25 % define range of N interested in fitting
         id_N = randperm(total_N, NN); % id of neurons activity we are going to train on
 
         train = train_reps(id_N,:); % select the training data
+        
+        if strcmp(name, 'third')
+            correlations = cat(1,num2cell(nchoosek(1:NN,1),2), ...
+                num2cell(nchoosek(1:NN,2),2),...
+                num2cell(nchoosek(1:NN,3),2));
 
-        model = maxent.createModel(NN, name); % declare the model
+                model = maxent.createModel(NN,'highorder',correlations);
+        else   
+            model = maxent.createModel(NN, name); % declare the model
+        end
 
 
         if strcmp(name,'ksync')
