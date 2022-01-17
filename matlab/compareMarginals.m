@@ -6,7 +6,7 @@ load ../data/shuffled_data/data2014
 [total_N, obvs] = size(train_reps);
 
 for NN = 10:25
-    n_reps = 10;
+    n_reps = 20;
     pks = zeros(NN+1, n_reps);  % to save pk
 
     for rep = 1:n_reps
@@ -36,7 +36,7 @@ load ../data/shuffled_data/data2014
 % parameters
 for NN = 10:25
     prefix = "../data/trained_models/stimulus_" + NN;
-    n_reps = 10;
+    n_reps = 20;
     n_samples = NN*10000; % choose this better
 
     % to save model pk to
