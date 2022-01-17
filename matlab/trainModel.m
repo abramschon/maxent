@@ -11,10 +11,10 @@ load ../data/shuffled_data/data2014
 % We then need to save the matlab models, and the model weights as csv
 % files. We will name the files `shuffle_NN_name_rep`
 
-for NN = 20:25 % define range of N interested in fitting
-    for rep = 2:10 % define which subset of the data to train on
+for NN = 10:21 % define range of N interested in fitting
+    for rep = 10:20 % define which subset of the data to train on
         shuffle = 'stimulus'; % how the data is shuffled: 'stimulus' or 'time'
-        name = 'third'; % 'indep' 'ksync' 'pairwise' 'third' or 'kpairwise'
+        name = 'indep'; % 'indep' 'ksync' 'pairwise' 'third' or 'kpairwise'
         file_name = "../data/trained_models/" + shuffle + "_" + NN + "_" + name + "_" + rep;
 
         % select which neurons activities to train model on
